@@ -8,3 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Debugging config
+.vscode/
+
+# Jupyter Notebooks
+.ipynb
