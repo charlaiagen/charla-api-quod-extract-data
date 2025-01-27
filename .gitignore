@@ -17,3 +17,6 @@ wheels/
 
 # Environment variables
 .env
+
+# Testing data results
+/data/tests_results/*
