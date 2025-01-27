@@ -2,19 +2,11 @@
 import os
 from dotenv import load_dotenv
 
-import toml
-import logfire
-
 from openai import AsyncAzureOpenAI # in order to use Azure OpenAI API we must use the AsyncAzureOpenAI class
 from pydantic_ai.models.openai import OpenAIModel
-from pydantic_ai import Agent
-from pydantic import BaseModel
 
 # --- Load Environment Variables --- #
 load_dotenv()
-
-# --- Configure logfire --- #
-logfire.configure()
 
 # --- Azure OpenAI Config --- #
 client = AsyncAzureOpenAI(
