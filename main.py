@@ -17,11 +17,17 @@ prompts = toml.load("prompts/prompts.toml")
 logfire.configure()
 
 # --- Build agents --- #
-field_extraction_agent = Agent(model=llm.gpt_4o, result_type=output.DocumentStructure)
+field_extraction_agent = Agent(
+    model=llm.gpt_4o,
+    result_type=output.DocumentStructure,
+    model_settings={
+        "temperature": 0
+    }
+)
 
 # %%
 # --- Load the pdf file --- #
-text = pdf_parser.extract_text_from_pdf("data/monark.pdf")
+text = pdf_parser.extract_text_from_pdf_pypdf2("data/monark.pdf")
 
 # %%
 ppt = prompts["field_extraction"]["field_extraction"].format(text=text)
