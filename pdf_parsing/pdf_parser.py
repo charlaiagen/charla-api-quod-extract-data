@@ -2,6 +2,7 @@
 import io
 import fitz
 import pdfplumber
+import PyPDF2
 import pytesseract
 from typing import List
 from dataclasses import dataclass
@@ -29,14 +30,22 @@ def pdf_ocr(pdf_path, num_pages=None):
             ocr_text += pytesseract.image_to_string(img, lang='por') + "\n"
 
 # --- PDF Reader --- #
-def extract_text_from_pdf(pdf_path, num_pages=None):
+def extract_text_from_pdf_pdf_plumber(pdf_path, num_pages=None):
     """Extracts text from a PDF file."""
     text = ""
     with pdfplumber.open(pdf_path) as reader:
         pages_to_read = reader.pages[:num_pages+1] if num_pages else reader.pages
-        text = "".join(page.extract_text(layout=True) for page in pages_to_read)
+        text = "".join(page.extract_text(layout=False) for page in pages_to_read)
 
     if not text:
         text = pdf_ocr(pdf_path, num_pages)
 
+    return text
+
+# --- PDF Reader PyPDF2 --- #
+def extract_text_from_pdf_pypdf2(pdf_path):
+    reader = PyPDF2.PdfReader(pdf_path)
+    text = ""
+    for page in reader.pages:
+        text += page.extract_text()
     return text
