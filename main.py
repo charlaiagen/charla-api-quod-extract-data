@@ -26,8 +26,8 @@ field_extraction_agent = Agent(
 )
 
 # %%
-# --- Load the pdf file --- #
-text = pdf_parser.extract_text_from_pdf_pypdf2("data/monark.pdf")
+# --- Load the pdf file using character density parameters --- #
+text = pdf_parser.extract_text_with_custom_settings("data/Wibson_-_Balanco_2023.pdf")
 
 # %%
 ppt = prompts["field_extraction"]["field_extraction"].format(text=text)
