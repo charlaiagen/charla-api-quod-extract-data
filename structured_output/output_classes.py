@@ -9,5 +9,5 @@ class DocumentStructure(BaseModel):
     passivo_circulante: List[str]
     passivo_nao_circulante: List[str]
     patrimonio_liquido: List[str]
-    dre: List[str]
+    demonstracao_do_resultado: List[str]
     datas: List[str]
