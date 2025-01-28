@@ -12,8 +12,9 @@ wheels/
 # Debugging config
 .vscode/
 
-# Jupyter Notebooks
+# Jupyter Notebooks and testing scripts
 .ipynb
+sandbox.py
 
 # Environment variables
 .env
