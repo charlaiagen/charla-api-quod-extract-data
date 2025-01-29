@@ -62,8 +62,8 @@ def extract_tables(pdf_path):
                 table_settings={
                     "vertical_strategy": "text",
                     "horizontal_strategy": "text",
-                    "intersection_y_tolerance": 10,
-                    "intersection_x_tolerance": 10,
+                    "intersection_y_tolerance": 4,
+                    "intersection_x_tolerance": 30,
                 }
             )
             all_tables.extend(tables)
