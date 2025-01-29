@@ -101,9 +101,10 @@ if __name__ == "__main__":
 from pdf_parsing import pdf_parser
 
 # %%
-text = pdf_parser.extract_text_from_pdf("data/monark.pdf")
+tables = pdf_parser.extract_tables("data/atradius.pdf")
+
 # %%
-print(text)
+print(len(tables[0]))
 # %%
 import PyPDF2
 
@@ -115,6 +116,27 @@ def extract_text_from_pdf(uploaded_file):
         text += page.extract_text()
     return text
 # %%
-text = extract_text_from_pdf("data/monark.pdf")
+text = extract_text_from_pdf("data/atradius.pdf")
 print(text)
+# %%
+from llmsherpa.readers import LayoutPDFReader
+from llmsherpa.readers.layout_reader import Document
+
+# %%
+llmsherpa_api_url = "http://localhost:5010/api/parseDocument?renderFormat=all"
+pdf = "data/esferatur.pdf"
+
+# %%
+pdf_reader = LayoutPDFReader(llmsherpa_api_url)
+
+# %%
+doc = pdf_reader.read_pdf(pdf)
+
+print(doc.tables()[1].to_text())
+# %%
+with open("output.txt", "wb") as f:
+    f.write(doc.to_text().encode("utf-8"))
+
+# %%
+document.
 # %%
