@@ -188,6 +188,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "docling" },
+    { name = "llmsherpa" },
     { name = "logfire" },
     { name = "pdfplumber" },
     { name = "pydantic-ai", extra = ["logfire"] },
@@ -207,6 +208,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "docling", specifier = ">=2.16.0" },
+    { name = "llmsherpa", specifier = ">=0.1.4" },
     { name = "logfire", specifier = ">=3.2.0" },
     { name = "pdfplumber", specifier = ">=0.11.5" },
     { name = "pydantic-ai", extras = ["logfire"], specifier = ">=0.0.19" },
@@ -965,6 +967,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/6f/6b/c875b30a1ba490860c93da4cabf479e03f584eba06fe5963f6f6644653d8/lazy_loader-0.4.tar.gz", hash = "sha256:47c75182589b91a4e1a85a136c074285a5ad4d9f39c63e0d7fb76391c4574cd1", size = 15431 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/83/60/d497a310bde3f01cb805196ac61b7ad6dc5dcf8dce66634dc34364b20b4f/lazy_loader-0.4-py3-none-any.whl", hash = "sha256:342aa8e14d543a154047afb4ba8ef17f5563baad3fc610d7b15b213b0f119efc", size = 12097 },
+]
+
+[[package]]
+name = "llmsherpa"
+version = "0.1.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "urllib3" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a9/3a/aa8e95bb37af926953314601cb2cc98e0e03846006d1ba13569e7ba6cb8e/llmsherpa-0.1.4.tar.gz", hash = "sha256:18789840ded3d7e37db6a5c668dac2b0a58f20e426beaed3e60554dee0a5ecb0", size = 17618 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/48/14/9292de86e30e935df9c51da95dc530b3755937289a597566a12b86d1388e/llmsherpa-0.1.4-py3-none-any.whl", hash = "sha256:88a651eacf221a997a9a9795903fbb70ddb211cd2e82831507de01284c917667", size = 13018 },
 ]
 
 [[package]]
