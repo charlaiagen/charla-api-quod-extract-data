@@ -8,6 +8,7 @@ from pdf_parsing import pdf_parser
 import logfire # for debugging, logging and tracing results
 import toml # for prompts
 from pydantic_ai import Agent # AI models and agents
+from llmsherpa.readers import LayoutPDFReader
 
 # --- Load the prompts --- #
 prompts = toml.load("prompts/prompts.toml")
@@ -27,7 +28,13 @@ field_extraction_agent = Agent(
 
 # %%
 # --- Load the pdf file using character density parameters --- #
-text = pdf_parser.extract_text_with_custom_settings("data/Wibson_-_Balanco_2023.pdf")
+# text = pdf_parser.extract_text_with_custom_settings("data/Wibson_-_Balanco_2023.pdf")
+
+# --- Load the pdf file using llmsherpa's LayoutPDFReader --- #
+llmsherpa_api_url = "http://localhost:5010/api/parseDocument?renderFormat=all"
+pdf_reader = LayoutPDFReader(llmsherpa_api_url)
+doc = pdf_reader.read_pdf("data/rominor.pdf")
+text = doc.to_text()
 
 # %%
 ppt = prompts["field_extraction"]["field_extraction"].format(text=text)
