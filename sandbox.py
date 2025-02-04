@@ -81,22 +81,22 @@ if __name__ == "__main__":
     main()
 
 # %%
-# import pdfplumber
-#
-# def extract_text_from_pdf(pdf_path, num_pages=None):
-    # """Extracts text from a PDF file."""
-    # text = ""
-    # with pdfplumber.open(pdf_path) as reader:
-        # pages_to_read = reader.pages[:num_pages+1] if num_pages else reader.pages
-        # text = "".join(page.extract_text(layout=True) for page in pages_to_read)
-#
-    # return text
+import pdfplumber
+
+def extract_text_from_pdf(pdf_path, num_pages=None):
+    """Extracts text from a PDF file."""
+    text = ""
+    with pdfplumber.open(pdf_path) as reader:
+        pages_to_read = reader.pages[:num_pages+1] if num_pages else reader.pages
+        text = "".join(page.extract_text(layout=True) for page in pages_to_read)
+
+#     return text
 # %%
-# text = extract_text_from_pdf("data/monark.pdf")
+text = extract_text_from_pdf("data/monark.pdf")
 # %%
-# print(text)
+print(text)
 # %%
-# text
+text
 # %%
 from pdf_parsing import pdf_parser
 
@@ -120,11 +120,11 @@ text = extract_text_from_pdf("data/atradius.pdf")
 print(text)
 # %%
 from llmsherpa.readers import LayoutPDFReader
-from llmsherpa.readers.layout_reader import Document
+from llmsherpa.readers.layout_reader import Document, Block
 
 # %%
 llmsherpa_api_url = "http://localhost:5010/api/parseDocument?renderFormat=all"
-pdf = "data/esferatur.pdf"
+pdf = r"data\5 - ATA VALLOUREC TUBOS PARA INDUSTRIA SA - SA.pdf"
 
 # %%
 pdf_reader = LayoutPDFReader(llmsherpa_api_url)
@@ -132,11 +132,56 @@ pdf_reader = LayoutPDFReader(llmsherpa_api_url)
 # %%
 doc = pdf_reader.read_pdf(pdf)
 
-print(doc.tables()[1].to_text())
 # %%
-with open("output.txt", "wb") as f:
-    f.write(doc.to_text().encode("utf-8"))
+blocks = Block(doc)
 
 # %%
-document.
+from pathlib import Path
+
+from docling.document_converter import DocumentConverter, PdfFormatOption
+from docling.datamodel.pipeline_options import PdfPipelineOptions, TableFormerMode
+from docling.datamodel.base_models import InputFormat
+
+# %%
+def run_pdf_pipeline(source_pdf: str, output_folder: str):
+    pipeline_options = PdfPipelineOptions(do_table_structure=True)
+    pipeline_options.table_structure_options.do_cell_matching = True
+    pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE
+
+    doc_converter = DocumentConverter(
+        format_options={
+            InputFormat.PDF: PdfFormatOption(
+                pipeline_options=pipeline_options
+            )
+        }
+    )
+
+    conv_res = doc_converter.convert(source_pdf)
+
+    tables_data = {}
+    for i, table in enumerate(conv_res.document.tables):
+        table_df = table.export_to_dataframe()
+        tables_data[f"table_{i}"] = table_df.to_dict(orient="records")
+
+    print("Pipeline completed successfully.")
+    return tables_data
+# %%
+run_pdf_pipeline(source_pdf='data/atradius.pdf', output_folder='data/atradius_tables')
+
+# %%
+import pandas as pd
+
+# %%
+df = pd.read_csv('data/atradius_tables/table_0.csv')
+df
+# %%
+# %%
+df = pd.read_csv('data/monark_tables/table_1.csv')
+df
+# %%
+df = pd.read_csv('data/monark_tables/table_2.csv')
+df
+# %%
+df = pd.read_csv('data/monark_tables/table_3.csv')
+df
 # %%
