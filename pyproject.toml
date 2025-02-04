@@ -15,10 +15,13 @@ dependencies = [
     "pytesseract>=0.3.13",
     "python-dotenv[cli]>=1.0.1",
     "toml>=0.10.2",
+    "torch>=2.5.1",
+    "transformers>=4.42.4",
 ]
 
 [dependency-groups]
 dev = [
     "black>=24.10.0",
     "ipykernel>=6.29.5",
+    "pypdf>=5.2.0",
 ]
