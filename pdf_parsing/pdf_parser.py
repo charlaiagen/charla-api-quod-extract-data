@@ -6,6 +6,7 @@ import PyPDF2
 import pytesseract
 from typing import List
 from dataclasses import dataclass
+from pypdf import PdfReader
 
 from PIL import Image
 
@@ -107,4 +108,13 @@ def extract_text_from_pdf_pypdf2(pdf_path):
     text = ""
     for page in reader.pages:
         text += page.extract_text()
+    return text
+
+# --- PDF Reader pypdf --- #
+def extract_text_from_pdf_pypdf(pdf_path):
+    reader = PdfReader(pdf_path)
+    text = ""
+    for page in reader.pages:
+        text += page.extract_text()
+
     return text
