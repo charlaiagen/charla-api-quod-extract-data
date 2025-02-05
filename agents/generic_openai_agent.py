@@ -24,20 +24,3 @@ gpt_4o = OpenAIModel(
     'gpt-4o',
     openai_client=client
     )
-
-# class Calculation(BaseModel):
-#     """Captures the result of a calculation"""
-#     result: int
-
-# # --- 4o-mini generic agent --- #
-# agent_4o_mini = Agent(model=gpt_4o_mini, result_type=Calculation)
-
-# # --- 4o generic agent --- #
-# agent_4o = Agent(model=gpt_4o)
-
-# # --- Test call --- #
-# result = agent_4o_mini.run_sync("What is 100 + 300")
-
-# logfire.notice('Output from LLM: {result}', result = str(result.data))
-# logfire.info('Result type: {result}', result = type(result.data))
-# logfire.info('Result: {result}', result = result.data.result)
