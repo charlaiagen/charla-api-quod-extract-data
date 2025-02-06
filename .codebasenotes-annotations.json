@@ -1,0 +1,35 @@
+{
+  "type": "dir",
+  "subNodes": {
+    ".codebasenotes-annotations.json": {
+      "type": "json",
+      "annotation": ""
+    },
+    "data": {
+      "type": "dir",
+      "annotation": "1. Testing and ground truth data storage."
+    },
+    "agents": {
+      "type": "dir",
+      "annotation": "2. Package declaring AzureOpenAI's 'gpt-4o' and 'gpt-4o-mini'.",
+      "subNodes": {
+        "generic_openai_agent.py": {
+          "type": "py",
+          "annotation": ""
+        }
+      }
+    },
+    "pdf_parsing": {
+      "type": "dir",
+      "annotation": "3. Package declaring a bunch of pdf parsing functions. Still in test & validation."
+    },
+    "prompts": {
+      "type": "dir",
+      "annotation": "4. Contains prompts being used in @agents"
+    },
+    "structured_output": {
+      "type": "dir",
+      "annotation": "5. Package declaring a Pydantic BaseModel class, used to structure an Agent's output to a given format."
+    }
+  }
+}
