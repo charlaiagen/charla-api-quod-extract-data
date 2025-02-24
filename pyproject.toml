@@ -3,25 +3,34 @@ name = "charla-api-quod-extract-data"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
-    "docling>=2.16.0",
-    "llmsherpa>=0.1.4",
-    "logfire>=3.2.0",
-    "pdfplumber>=0.11.5",
-    "pydantic-ai[logfire]>=0.0.19",
-    "pymupdf>=1.25.2",
-    "pypdf2>=3.0.1",
     "pytesseract>=0.3.13",
-    "python-dotenv[cli]>=1.0.1",
-    "toml>=0.10.2",
-    "torch>=2.5.1",
-    "transformers>=4.42.4",
+    "pdfplumber>=0.10.3",
+    "torch>=2.6.0",
+    "torchaudio>=2.6.0",
+    "torchvision>=0.21.0",
+    "transformers>=4.37.2",
+    "matplotlib>=3.10.0",
+    "numpy>=1.26.0",
+    "timm==1.0.15",
+]
+
+
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cu124", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchvision = [
+  { index = "pytorch-cu124", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
 ]
 
 [dependency-groups]
 dev = [
-    "black>=24.10.0",
     "ipykernel>=6.29.5",
-    "pypdf>=5.2.0",
 ]
